@@ -84,11 +84,12 @@ fn two() -> i32 {
 }
 
 fn two_two() -> i32 {
+    let input = fs::read_to_string("src/inputs/two.txt").expect("Unable to read file");
+    let original_opcodes: Vec<i32> = input.split(",").map(|x| x.parse::<i32>().unwrap()).collect();
     loop {
         for noun in 0..100 {
             for verb in 0..100 {
-                let input = fs::read_to_string("src/inputs/two.txt").expect("Unable to read file");
-                let mut opcodes: Vec<i32> = input.split(",").map(|x| x.parse::<i32>().unwrap()).collect();
+                let mut opcodes = original_opcodes.clone();
                 opcodes[1] = noun;
                 opcodes[2] = verb;
                 let mut position: usize = 0;
